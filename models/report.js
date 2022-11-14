@@ -5,8 +5,7 @@ const Schema = mongoose.Schema;
 const reportSchema = new Schema({
     date: {
         type: Date,
-        required: true,
-        timestamp: true,
+        default: Date.now
     },
     userId: {
         type: Schema.Types.ObjectId,

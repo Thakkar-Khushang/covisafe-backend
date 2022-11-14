@@ -3,10 +3,6 @@ const Schema = mongoose.Schema;
 
 
 const sensingSchema = new Schema({
-    capturedImg: {
-        type: String,
-        required: true,
-    },
     isfaceauth: {
         type: Boolean,
         required: true,
@@ -18,6 +14,10 @@ const sensingSchema = new Schema({
     bodytemp: {
         type: Number,
         required: true,
+    },
+    reportId: {
+        type: Schema.Types.ObjectId,
+        ref: 'Report',
     },
 });
 

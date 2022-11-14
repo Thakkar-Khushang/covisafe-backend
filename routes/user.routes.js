@@ -3,8 +3,8 @@ const router = express.Router();
 const User = require('../models/user');
 
 router.get('/profile', (req, res) => {
-    const {email} = req.body;
-    User.findOne({email: email}, (err, user) => {
+    const { email } = req.query;
+    User.findOne({ email: email }, (err, user) => {
         if (err) {
             res.status(500).send(err);
         } else {
@@ -15,15 +15,24 @@ router.get('/profile', (req, res) => {
 
 router.post('/adduser', async (req, res) => {
     const { facedata, name, email } = req.body;
-    const user = new User({
-        facedata,
-        name,
-        email,
-    });
+    console.log(facedata, name, email);
     try {
-        const savedUser = await user.save();
-        res.status(200).send(savedUser);
+        const user = await User.findOne({ email: email })
+        console.log(user)
+        if (user) return res.status(400).send('User already exists');
+        else {
+            const newUser = new User({
+                facedata,
+                name,
+                email,
+            });
+
+            const savedUser = await newUser.save();
+            res.status(200).send(savedUser);
+
+        }
     } catch (err) {
+        console.log(err)
         res.status(400).send(err);
     }
 });

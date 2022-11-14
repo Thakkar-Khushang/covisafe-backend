@@ -6,6 +6,8 @@ const mongoose = require('mongoose');
 const User = require("./models/user")
 
 const userRoutes = require('./routes/user.routes');
+const adminRoutes = require('./routes/admin.routes');
+const reportRoutes = require('./routes/report.routes');
 
 const app = express();
 
@@ -23,13 +25,18 @@ app.post('/login', (req, res) => {
 });
 
 app.use('/user', userRoutes);
+app.use('/admin', adminRoutes)
+app.use('/report', reportRoutes)
 
 mongoose.connect(
-    process.env.MONGO_URI, 
+    process.env.DB_URI, 
     { useNewUrlParser: true, useUnifiedTopology: true },
-    () => {
-        User
-        console.log('Connected to DB');
-        app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+    (err) => {
+        if(err) console.log(err) 
+        else {
+            User.init()
+            console.log('Connected to DB');
+            app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+        }
 })
 
