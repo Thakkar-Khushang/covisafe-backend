@@ -19,6 +19,14 @@ const reportSchema = new Schema({
         type: String,
         required: true,
     },
+    sensing:{
+        type: Schema.Types.ObjectId,
+        ref: 'Sensing',
+    },
+    actuation:{
+        type: Schema.Types.ObjectId,
+        ref: 'Actuation',
+    }
 });
 
 const Report = mongoose.model('Report', reportSchema);

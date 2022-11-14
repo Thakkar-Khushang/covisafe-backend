@@ -15,10 +15,6 @@ const sensingSchema = new Schema({
         type: Number,
         required: true,
     },
-    reportId: {
-        type: Schema.Types.ObjectId,
-        ref: 'Report',
-    },
 });
 
 
