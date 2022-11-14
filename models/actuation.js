@@ -21,4 +21,6 @@ const actuationSchema = new Schema({
 
 const Actuation = mongoose.model('Actuation', actuationSchema);
 
+module.exports = Actuation
+
 

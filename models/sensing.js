@@ -23,3 +23,5 @@ const sensingSchema = new Schema({
 
 
 const Sensing = mongoose.model('Sensing', sensingSchema);
+
+module.exports = Sensing

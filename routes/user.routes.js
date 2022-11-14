@@ -1,9 +1,17 @@
-const router = require('express').Router();
+const express = require('express');
+const router = express.Router();
 const User = require('../models/user');
-// const Report = require('../models/report');
-// const Actuation = require('../models/actuation');
-// const bcrypt = require('bcryptjs');
-// const jwt = require('jsonwebtoken');
+
+router.get('/profile', (req, res) => {
+    const {email} = req.body;
+    User.findOne({email: email}, (err, user) => {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.status(200).send(user);
+        }
+    });
+})
 
 router.post('/adduser', async (req, res) => {
     const { facedata, name, email } = req.body;
