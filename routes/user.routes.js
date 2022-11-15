@@ -36,4 +36,19 @@ router.post('/adduser', async (req, res) => {
     }
 });
 
+//get user name by id
+router.get('/getname', (req, res) => {
+    const { id } = req.query;
+    User.findOne({
+        _id: id
+    }, (err, user) => {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            console.log(user)
+            res.status(200).send(user);
+        }
+    });
+})
+
 module.exports = router;
