@@ -14,15 +14,14 @@ router.get('/profile', (req, res) => {
 })
 
 router.post('/adduser', async (req, res) => {
-    const { facedata, name, email } = req.body;
-    console.log(facedata, name, email);
+    const { name, email } = req.body;
+    console.log(name, email);
     try {
         const user = await User.findOne({ email: email })
         console.log(user)
         if (user) return res.status(400).send('User already exists');
         else {
             const newUser = new User({
-                facedata,
                 name,
                 email,
             });
