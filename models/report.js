@@ -22,6 +22,10 @@ const reportSchema = new Schema({
     actuation:{
         type: Schema.Types.ObjectId,
         ref: 'Actuation',
+    },
+    reason: {
+        type: String,
+        default: ""
     }
 });
 

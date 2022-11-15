@@ -44,10 +44,10 @@ router.post('/add', async (req, res) => {
                 res.status(400).send({message: "One person is already being processed, please wait"});
             } else{
                 var t = new Date();
-                t.setSeconds(t.getSeconds() + 300);                
+                t.setSeconds(t.getSeconds() + 600);                
                 const intermediate = new Intermediate({ isfaceauth, name, email, timeToDie: t });
                 const savedIntermediate = await intermediate.save();
-                setTimeout(deleteIntermediate, 300000);
+                setTimeout(deleteIntermediate, 600000);
                 res.status(200).send(savedIntermediate);
             }
         }
@@ -94,6 +94,10 @@ router.post('/update', async (req, res) => {
                 reason = "Mask not worn"
             } else if (sensing.bodytemp > 37){
                 reason = "Body temperature too high"
+            } else if (!accessstatus){
+                reason = "Access denied"
+            } else{
+                reason = "Access granted"
             }
     
             const newReport = new Report({
