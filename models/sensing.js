@@ -5,15 +5,15 @@ const Schema = mongoose.Schema;
 const sensingSchema = new Schema({
     isfaceauth: {
         type: Boolean,
-        required: true,
+        default: false
     },
     ismask: {
         type: Boolean,
-        required: true,
+        default: false
     },
     bodytemp: {
         type: Number,
-        required: true,
+        default: 0
     },
 });
 

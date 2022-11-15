@@ -5,11 +5,11 @@ const Schema = mongoose.Schema;
 const actuationSchema = new Schema({
     doorstatus: {
         type: Boolean,
-        required: true,
+        default: false
     },
     sanitizerstatus: {
         type: Boolean,
-        required: true,
+        default: false
     },
 });
 

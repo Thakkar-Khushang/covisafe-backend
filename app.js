@@ -8,6 +8,7 @@ const User = require("./models/user")
 const userRoutes = require('./routes/user.routes');
 const adminRoutes = require('./routes/admin.routes');
 const reportRoutes = require('./routes/report.routes');
+const intermediateRoutes = require('./routes/intermediate.routes');
 
 const app = express();
 
@@ -21,12 +22,13 @@ app.get('/', (req, res) => res.send('Hello World!'));
 app.post('/login', (req, res) => {
     const { username, password } = req.body;
     console.log(username, password);
-    res.status(200).send('Hello World!');
+    res.status(200).send('Logged in');
 });
 
 app.use('/user', userRoutes);
 app.use('/admin', adminRoutes)
 app.use('/report', reportRoutes)
+app.use('/intermediate', intermediateRoutes)
 
 mongoose.connect(
     process.env.DB_URI, 
