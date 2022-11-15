@@ -15,10 +15,6 @@ const reportSchema = new Schema({
         type: Boolean,
         required: true,
     },
-    reason: {
-        type: String,
-        required: true,
-    },
     sensing:{
         type: Schema.Types.ObjectId,
         ref: 'Sensing',

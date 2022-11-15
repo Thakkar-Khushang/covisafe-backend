@@ -44,7 +44,7 @@ router.post('/add', async (req, res) => {
                 res.status(400).send({message: "One person is already being processed, please wait"});
             } else{
                 var t = new Date();
-                t.setSeconds(t.getSeconds() + 300);
+                t.setSeconds(t.getSeconds() + 300);                
                 const intermediate = new Intermediate({ isfaceauth, name, email, timeToDie: t });
                 const savedIntermediate = await intermediate.save();
                 setTimeout(deleteIntermediate, 300000);
@@ -58,7 +58,7 @@ router.post('/add', async (req, res) => {
 })
     
 router.post('/update', async (req, res) => {
-    const { accessstatus, reason, sensing, actuation } = req.body;
+    const { accessstatus, sensing, actuation } = req.body;
     try{
         var intermediate = await checkIfIntermediateExistsAndIsIntact();
 
@@ -86,6 +86,15 @@ router.post('/update', async (req, res) => {
 
             // console.log(savedActuation)
 
+            reason = ""
+
+            if(!intermediate.isfaceauth){
+                reason = "Face not authenticated"
+            } else if (!sensing.ismask){
+                reason = "Mask not worn"
+            } else if (sensing.bodytemp > 37){
+                reason = "Body temperature too high"
+            }
     
             const newReport = new Report({
                 userId: user._id,
